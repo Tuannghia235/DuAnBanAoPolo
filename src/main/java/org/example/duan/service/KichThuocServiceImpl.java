@@ -20,6 +20,6 @@ public class KichThuocServiceImpl implements KichThuocService{
 
     @Override
     public List<KichThuoc> getConHang() {
-        return List.of();
+        return repo.getConHang();
     }
 }

@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface KichThuocRepo extends JpaRepository<KichThuoc, Integer> {
-    @Query(value = "select kt from KichThuoc ",nativeQuery = true)
+    @Query(value = "select kt from KichThuoc where trangThai = true ",nativeQuery = true)
     List<KichThuoc> getConHang();
 }
