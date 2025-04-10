@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết khuyến mãi sản phẩm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">Chi tiết khuyến mãi sản phẩm</h1>
+        
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Thông tin khuyến mãi sản phẩm
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-3 fw-bold">ID:</div>
+                    <div class="col-md-9" th:text="${sanPhamKhuyenMai.id}"></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3 fw-bold">Sản phẩm:</div>
+                    <div class="col-md-9" th:text="${sanPhamKhuyenMai.sanPham != null ? sanPhamKhuyenMai.sanPham.ten : ''}"></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3 fw-bold">Khuyến mãi:</div>
+                    <div class="col-md-9" th:text="${sanPhamKhuyenMai.khuyenMai != null ? sanPhamKhuyenMai.khuyenMai.ten : ''}"></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3 fw-bold">Phần trăm giảm:</div>
+                    <div class="col-md-9" th:text="${sanPhamKhuyenMai.khuyenMai != null ? sanPhamKhuyenMai.khuyenMai.phanTramGiam + '%' : ''}"></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3 fw-bold">Thời gian áp dụng:</div>
+                    <div class="col-md-9">
+                        <span th:if="${sanPhamKhuyenMai.khuyenMai != null && sanPhamKhuyenMai.khuyenMai.ngayBatDau != null && sanPhamKhuyenMai.khuyenMai.ngayKetThuc != null}"
+                              th:text="'Từ ' + ${#temporals.format(sanPhamKhuyenMai.khuyenMai.ngayBatDau, 'dd/MM/yyyy')} + 
+                                       ' đến ' + ${#temporals.format(sanPhamKhuyenMai.khuyenMai.ngayKetThuc, 'dd/MM/yyyy')}"></span>
+                        <span th:unless="${sanPhamKhuyenMai.khuyenMai != null && sanPhamKhuyenMai.khuyenMai.ngayBatDau != null && sanPhamKhuyenMai.khuyenMai.ngayKetThuc != null}">
+                            Không có thông tin
+                        </span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3 fw-bold">Mô tả khuyến mãi:</div>
+                    <div class="col-md-9" th:text="${sanPhamKhuyenMai.khuyenMai != null && sanPhamKhuyenMai.khuyenMai.moTa != null ? sanPhamKhuyenMai.khuyenMai.moTa : 'Không có mô tả'}"></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3 fw-bold">Trạng thái:</div>
+                    <div class="col-md-9">
+                        <span th:if="${sanPhamKhuyenMai.trangThai}" class="badge bg-success">Hoạt động</span>
+                        <span th:unless="${sanPhamKhuyenMai.trangThai}" class="badge bg-danger">Ngưng hoạt động</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex gap-2">
+                    <a th:href="@{/khuyen-mai-san-pham/sua/{id}(id=${sanPhamKhuyenMai.id})}" class="btn btn-warning">Sửa</a>
+                    <a th:href="@{/khuyen-mai-san-pham}" class="btn btn-secondary">Quay lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
